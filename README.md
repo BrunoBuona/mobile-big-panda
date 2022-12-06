@@ -4,7 +4,7 @@ MyTinerary! es aplicación web de itinerarios de viajes, donde entre otras funci
 
 # Trabajo realizado 📋
 
-Aplicacion web desarrollada en cinco semanas en un equipo de dos personas como parte del programa de programacion web Full Stack MERN realizado en MindHub, siguiendo buenas prácticas y metodologias ágiles para la elaboracion de la misma.
+Aplicacion mobile desarrollada en tres dias individualmente como parte del programa de programacion web Full Stack MERN realizado en MindHub, siguiendo buenas prácticas y metodologias ágiles para la elaboracion de la misma.
 
 # Construido con 🛠️
 * [MongoDB](https://www.mongodb.com/) - Base de datos
