@@ -1,6 +1,6 @@
-# MyTinerary! ✈
+# MyTinerary Mobile! ✈
 
-MyTinerary! es aplicación web de itinerarios de viajes, donde entre otras funcionalidades, se pueden apreciar distintas ciudades del mundo con sus respectivos itinerarios y actividades, los cuales pueden ser Likeados como tambien Comentados por usuarios.
+MyTinerary! es  una aplicación web y mobile de itinerarios de viajes, donde entre otras funcionalidades, se pueden apreciar distintas ciudades del mundo con sus respectivos itinerarios y actividades, los cuales pueden ser Likeados como tambien Comentados por usuarios.
 
 # Trabajo realizado 📋
 
