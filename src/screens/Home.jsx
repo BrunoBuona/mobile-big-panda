@@ -1,5 +1,8 @@
 import { StatusBar } from "expo-status-bar"
 import React from "react"
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { BASE_URL } from "../api/url";
 import {
   StyleSheet,
   Text,
@@ -12,15 +15,6 @@ import {
 } from "react-native";
 
 import { LinearGradient } from "expo-linear-gradient";
-
-const imagenes = [
-  "https://media-cdn.tripadvisor.com/media/photo-s/25/fb/8c/46/hotel-exterior.jpg",
-  "https://media-cdn.tripadvisor.com/media/photo-s/16/1a/ea/54/hotel-presidente-4s.jpg",
-  "https://www.cronista.com/files/image/307/307126/5ffe2f4705222.jpg",
-  "https://cloudfront-us-east-1.images.arcpublishing.com/infobae/E3RZXK3LZJHCLOEHX2E2MAPWRE.jpg",
-  "https://media-cdn.tripadvisor.com/media/photo-s/25/3c/0e/b9/exterior.jpg",
-];
-
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
@@ -29,56 +23,68 @@ const ESPACIO_CONTENEDOR = (width - ANCHO_CONTENEDOR) / 2;
 const ESPACIO = 10;
 const ALTURA_BACKDROP = height * 0.5;
 
-function Backdrop({ scrollX }) {
-  return (
-    <View
-      style={[
-        {
-          position: "absolute",
-          height: '125%',
-          top: 0,
-          width: width,
-          backgroundColor: '#4D0179'
-        },
-        StyleSheet.absoluteFillObject,
-      ]}
-    >
-      {imagenes.map((imagen, index) => {
-        const inputRange = [
-          (index - 1) * ANCHO_CONTENEDOR,
-          index * ANCHO_CONTENEDOR,
-          (index + 1) * ANCHO_CONTENEDOR,
-        ];
-
-        const opacity = scrollX.interpolate({
-          inputRange,
-          outputRange: [0, 1, 0],
-        });
-        return (
-          <Animated.Image
-            key={index}
-            source={{ uri: imagen }}
-            style={[
-              { width: width, height: ALTURA_BACKDROP, opacity },
-              StyleSheet.absoluteFillObject,
-            ]}
-          />
-        );
-      })}
-      <LinearGradient
-        colors={["transparent", "white"]}
-        style={{
-          width,
-          height: ALTURA_BACKDROP,
-          position: "absolute",
-          bottom: 0,
-        }}
-      />
-    </View>
-  );
-}
 
 export default function App(props) {
+  const [imagenes, setImg] = useState([])
+  async function fetchHotels() {
+    await axios.get(`${BASE_URL}/api/hotels`).then((response) => {
+      let datamapped = response.data.response.map((hotel) => {
+        return hotel.photo[0]
+      })
+      setImg(datamapped)
+    })
+  }
+  useEffect(() => {
+    fetchHotels()
+  }, [])
+  function Backdrop({ scrollX }) {
+    return (
+      <View
+        style={[
+          {
+            position: "absolute",
+            height: '125%',
+            top: 0,
+            width: width,
+            backgroundColor: '#4D0179'
+          },
+          StyleSheet.absoluteFillObject,
+        ]}
+      >
+        {imagenes.map((imagen, index) => {
+          const inputRange = [
+            (index - 1) * ANCHO_CONTENEDOR,
+            index * ANCHO_CONTENEDOR,
+            (index + 1) * ANCHO_CONTENEDOR,
+          ];
+  
+          const opacity = scrollX.interpolate({
+            inputRange,
+            outputRange: [0, 1, 0],
+          });
+          return (
+            <Animated.Image
+              key={index}
+              source={{ uri: imagen }}
+              style={[
+                { width: width, height: ALTURA_BACKDROP, opacity },
+                StyleSheet.absoluteFillObject,
+              ]}
+            />
+          );
+        })}
+        <LinearGradient
+          colors={["transparent", "white"]}
+          style={{
+            width,
+            height: ALTURA_BACKDROP,
+            position: "absolute",
+            bottom: 0,
+          }}
+        />
+      </View>
+    );
+  }
   const scrollX = React.useRef(new Animated.Value(0)).current;
   const NavigateCounter = () => {
     props.navigation.navigate('Hotels');
@@ -134,14 +140,14 @@ export default function App(props) {
       </SafeAreaView>
       <View style={styles.ctahotelsdiv} >
         <Text style={styles.ctahotels}>¿Want to check someone specific?</Text>
-      <TouchableOpacity 
-      onPress={NavigateCounter}
-      
-      style={styles.btn_menu}>
-        <Text style={styles.btn_text}>
-          SEE HOTELS
-        </Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          onPress={NavigateCounter}
+
+          style={styles.btn_menu}>
+          <Text style={styles.btn_text}>
+            SEE HOTELS
+          </Text>
+        </TouchableOpacity>
       </View>
     </>
   );
@@ -161,19 +167,19 @@ const styles = StyleSheet.create({
     margin: 0,
     marginBottom: 10,
   },
-  ctahotelsdiv:{
-   display: 'flex',
-   justifyContent: 'center',
-   bottom: 60,
+  ctahotelsdiv: {
+    display: 'flex',
+    justifyContent: 'center',
+    bottom: 60,
   },
-  ctahotels:{
+  ctahotels: {
     color: 'white',
     fontWeight: 'bold',
     width: '100%',
     textAlign: 'center',
     fontSize: 24,
   },
-  btn_menu:{
+  btn_menu: {
     alignItems: 'center',
     justifyContent: 'center',
     padding: 15,
@@ -183,7 +189,7 @@ const styles = StyleSheet.create({
     marginTop: 55,
     margin: 5,
   },
-  btn_text:{
+  btn_text: {
     fontSize: 20,
     color: 'white',
     fontWeight: 'bold',
