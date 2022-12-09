@@ -1,0 +1,1 @@
+export const BASE_URL="https://back-la-pandita-production-8b26.up.railway.app"

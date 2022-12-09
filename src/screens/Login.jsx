@@ -1,11 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
-import { Alert, StyleSheet, Text, TextInput, View, TouchableOpacity, Image } from 'react-native';
+import { Alert, Touchable, StyleSheet, Text, TextInput, View, TouchableOpacity, Image } from 'react-native';
 import icon from '../../assets/logo.png';
+import {useForm, Controller} from 'react-hook-form';
 
 export default function Login(props) {
   const NavigateCounter = () => {
     props.navigation.navigate('Register');
   }
+  const {control, handleSubmit, errors, setValue, getValues} = useForm()
+  const onSubmit = (data) => {};
+  const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
   return (
     <View style={styles.container}>
       <Image
