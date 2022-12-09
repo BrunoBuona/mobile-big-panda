@@ -2,7 +2,11 @@ import { StatusBar } from 'expo-status-bar';
 import { Alert, Touchable, StyleSheet, Text, TextInput, View, TouchableOpacity, Image } from 'react-native';
 import icon from '../../assets/logo.png';
 
-export default function Main() {
+
+export default function Main(props) {
+  const NavigateCounter = () => {
+    props.navigation.navigate('Login');
+  }
   return (
     <View style={styles.container}>
       <Image
@@ -12,7 +16,8 @@ export default function Main() {
       <Text style={styles.main}>MyTinerary</Text>
       <Text style={styles.submain}>Discover the world with an amazing application.</Text>
       <TouchableOpacity 
-      onPress={()=>Alert.alert('Hello')}
+      onPress={NavigateCounter}
+      
       style={styles.btn_menu}>
         <Text style={styles.btn_text}>
           JOIN NOW
