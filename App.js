@@ -5,6 +5,7 @@ import Main from './src/screens/Main.jsx';
 import Login from './src/screens/Login.jsx';
 import Register from './src/screens/Register.jsx';
 import Home from './src/screens/Home.jsx';
+import Hotel from './src/screens/Hotels.jsx';
 const Stack = createNativeStackNavigator();
 export default function App() {
   return(
@@ -14,6 +15,7 @@ export default function App() {
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Hotels" component={Hotel} />
     </Stack.Navigator>
   </NavigationContainer>
 )
