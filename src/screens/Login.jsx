@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { Alert, Touchable, StyleSheet, Text, TextInput, View, TouchableOpacity, Image } from 'react-native';
+import { Alert, StyleSheet, Text, TextInput, View, TouchableOpacity, Image } from 'react-native';
 import icon from '../../assets/logo.png';
 
 export default function Login(props) {
